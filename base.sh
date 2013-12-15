@@ -50,6 +50,7 @@ EOF
 
 AS_USER_SCRIPT=$( cat <<EOF
     cd;
+    ln -s /var/log/apache2 apachelogs;
     git clone https://github.com/clamburger/vidya-gaem-awards.git www;
     cd www;
     cp /vagrant/config.php includes;
