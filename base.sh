@@ -15,7 +15,7 @@ cat <<EOF > /etc/apache2/sites-available/vga
 	</Directory>
 	<Directory /home/vagrant/www/>
 		Options Indexes FollowSymLinks MultiViews
-		AllowOverride None
+		AllowOverride All
 		Order allow,deny
 		allow from all
 	</Directory>
