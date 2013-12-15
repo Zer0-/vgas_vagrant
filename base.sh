@@ -58,5 +58,6 @@ EOF
 
 rm /etc/apache2/sites-enabled/*
 ln -s /etc/apache2/sites-available/vga /etc/apache2/sites-enabled/vga
+a2enmod rewrite
 service apache2 restart
 su - vagrant -c "$AS_USER_SCRIPT"
