@@ -14,6 +14,8 @@ AS_USER_SCRIPT=$( cat <<EOF
     git clone https://github.com/itchyny/lightline.vim.git;
     git clone https://github.com/tpope/vim-surround.git;
     git clone https://github.com/kien/ctrlp.vim.git;
+    git clone https://github.com/mattn/emmet-vim.git;
+    git clone https://github.com/nathanaelkane/vim-indent-guides.git;
 
     cp /vagrant/.vimrc /home/vagrant;
 EOF
