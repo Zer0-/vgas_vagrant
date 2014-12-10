@@ -117,5 +117,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #   chef.validation_client_name = "ORGNAME-validator"
     config.vm.provision "shell", path: "base.sh"
     config.vm.provision "shell", path: "install_mariadb.sh"
-    config.vm.provision "shell", path: "install_vim.sh"
 end
