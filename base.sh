@@ -6,18 +6,21 @@ apt-get -y install\
     php5-mysql\
     git
 
-cat <<EOF > /etc/apache2/sites-available/vga
-<VirtualHost *:80>
+cat <<EOF > /etc/apache2/sites-available/vga.conf
+<VirtualHost *>
 	DocumentRoot /home/vagrant/www
 	<Directory />
-		Options FollowSymLinks
-		AllowOverride None
+		Options Indexes FollowSymLinks MultiViews
+		Require all granted
+		AllowOverride All
+		Order allow,deny
+		Allow from all
 	</Directory>
 	<Directory /home/vagrant/www/>
 		Options Indexes FollowSymLinks MultiViews
 		AllowOverride All
 		Order allow,deny
-		allow from all
+		Allow from all
 	</Directory>
 
 	ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
@@ -28,22 +31,13 @@ cat <<EOF > /etc/apache2/sites-available/vga
 		Allow from all
 	</Directory>
 
-	ErrorLog \${APACHE_LOG_DIR}/vga_error.log
+	ErrorLog ${APACHE_LOG_DIR}/vga_error.log
 
 	# Possible values include: debug, info, notice, warn, error, crit,
 	# alert, emerg.
-	LogLevel warn
+	LogLevel info
 
-	CustomLog \${APACHE_LOG_DIR}/vga_access.log combined
-
-    Alias /doc/ "/usr/share/doc/"
-    <Directory "/usr/share/doc/">
-        Options Indexes MultiViews FollowSymLinks
-        AllowOverride None
-        Order deny,allow
-        Deny from all
-        Allow from 127.0.0.0/255.0.0.0 ::1/128
-    </Directory>
+	CustomLog ${APACHE_LOG_DIR}/vga_access.log combined
 
 </VirtualHost>
 EOF
@@ -58,7 +52,7 @@ EOF
 )
 
 rm /etc/apache2/sites-enabled/*
-ln -s /etc/apache2/sites-available/vga /etc/apache2/sites-enabled/vga
+ln -s /etc/apache2/sites-available/vga.conf /etc/apache2/sites-enabled/vga.conf
 a2enmod rewrite
 service apache2 restart
 su - vagrant -c "$AS_USER_SCRIPT"
